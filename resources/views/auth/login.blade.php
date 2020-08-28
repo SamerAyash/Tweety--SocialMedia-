@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@push('style')
+    <link href="{{asset('css/all.min.css')}}" rel="stylesheet">
+@endpush
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -65,6 +67,27 @@
                             </div>
                         </div>
                     </form>
+                    <hr class="w-75">
+                    <div class="text-center">
+                        <h5>Sing in with:</h5>
+                        <a href="/login/facebook" class="btn bg-primary text-white w-75 mb-1 pt-2 pb-0" style="background-color: #385898">
+                            <h5>
+                                <i class="fab fa-facebook">
+                                    Facebook
+                                </i>
+                            </h5>
+
+                        </a>
+                        <a href="/login/github" class="btn btn-dark text-white w-75 mb-1 pt-2 pb-0">
+                            <h5>
+                                <i class="fab fa-github">
+                                    Github
+                                </i>
+                            </h5>
+
+                        </a>
+
+                    </div>
                 </div>
             </div>
         </div>

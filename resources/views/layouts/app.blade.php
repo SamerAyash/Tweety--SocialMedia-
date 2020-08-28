@@ -28,6 +28,7 @@
         }
     </style>
     @stack('style')
+    @stack('mix')
 </head>
 <body>
     <div id="app">
@@ -57,6 +58,6 @@
             </main>
         </section>
     </div>
+    @stack('script')
 </body>
-@stack('script')
 </html>

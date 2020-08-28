@@ -16,9 +16,13 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+//////////////////////////////// Socialite /////////////////////////////////
+Route::get('login/{provider}', 'Auth\SocialController@redirectToProvider');
+Route::get('login/{provider}/callback', 'Auth\SocialController@handleProviderCallback');
+///////////////////////////////////////////////////////////////////////////
 Route::middleware('auth')->group(function (){
     Route::get('/tweets', 'TweetController@index')->name('home');
+    Route::post('/tweets/getTweet', 'TweetController@getTweets');
     Route::post('/tweets', 'TweetController@store');
 
     Route::get('/profile/{user}', ['as'=>'profile.show','uses'=>'ProfileController@show']);

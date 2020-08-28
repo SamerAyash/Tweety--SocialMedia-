@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tweet;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
 
 class TweetController extends Controller
@@ -26,22 +27,28 @@ class TweetController extends Controller
         return view('tweet.home',['tweets'=>$tweets]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function getTweets(Request $request){
+        $tweets='';
+        if ($request['tweet_profile'] && $request['user_id']){
+            $tweets=Tweet::with('user')
+                ->where('user_id',$request['user_id'])
+                ->withLikes()
+                ->latest()
+                ->paginate(5);
+        }
+        else{
+
+            $ids=auth()->user()->follows->pluck('id');
+            $tweets =Tweet::with('user')
+                ->whereIn('user_id',$ids)
+                ->orWhere('user_id',auth()->id())
+                ->withLikes()
+                ->latest()
+                ->paginate(50);
+        }
+        return response()->json($tweets,Response::HTTP_OK);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -55,48 +62,4 @@ class TweetController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Tweet  $tweet
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tweet $tweet)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Tweet  $tweet
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tweet $tweet)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tweet  $tweet
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Tweet $tweet)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Tweet  $tweet
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Tweet $tweet)
-    {
-        //
-    }
 }

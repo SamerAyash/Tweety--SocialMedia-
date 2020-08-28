@@ -29,5 +29,25 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' =>'http://127.0.0.1:8000/login/github/callback',
+    ],
+    'facebook' => [
+        'client_id' => env('FACEBOOK_KEY'),
+        'client_secret' => env('FACEBOOK_SECRET'),
+        'redirect' => 'http://localhost:8000/login/facebook/callback'
+    ],
+    'twitter' => [
+        'client_id'     => env('TW_ID'),
+        'client_secret' => env('TW_SECRET'),
+        'redirect'      => env('APP_URL'),
+    ],
+    'linkedin' => [
+        'client_id' => env('LINKEDIN_KEY'),
+        'client_secret' => env('LINKEDIN_SECRET'),
+        'redirect' => env('LINKEDIN_REDIRECT_URI')
+    ],
 
 ];

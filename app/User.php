@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email','avatar','password','username'
+        'name', 'email','avatar','password','username','provider_id'
     ];
 
     /**
@@ -58,6 +58,11 @@ class User extends Authenticatable
 
     public function getAvatar($avatar){
         return $avatar ? asset('storage/'.$avatar): 'https://i.pravatar.cc/150?u='.$this->id/*asset('images/default.png')*/;
+    }
+
+    public function getSocialAttribute($value)
+    {
+        return json_decode($value);
     }
 
 }

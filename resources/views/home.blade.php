@@ -1,6 +1,6 @@
 @extends('layouts.app')
-
 @section('content')
+
     <div class="row d-flex justify-content-between">
         <div class="col-lg-3">
             @include('_sidebar-links')

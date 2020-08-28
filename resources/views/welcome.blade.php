@@ -80,8 +80,8 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="title m-b-md" style="color: dodgerblue !important;">
+                    Tweety
                 </div>
 
                 <div class="links">
